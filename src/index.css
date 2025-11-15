@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #000000;
+  --primary-dark: #1a1a1a;
+  --bg-primary: 255, 255, 255;
+  --bg-secondary: 245, 245, 245;
+  --text-primary: #000000;
+  --text-secondary: #4a4a4a;
+  --border-color: rgba(0, 0, 0, 0.2);
+  --chat-user: #f0f0f0;
+  --chat-bot: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --hover-overlay: rgba(0, 0, 0, 0.05);
+}
+
+@layer base {
+  body {
+    @apply bg-bg-primary text-text-primary;
+    font-family: 'Google Sans', system-ui, -apple-system, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Typography Styles */
+  h1 {
+    @apply text-2xl font-bold text-primary mb-4;
+  }
+
+  h2 {
+    @apply text-xl font-bold text-primary mb-3;
+  }
+
+  h3 {
+    @apply text-lg font-bold text-primary mb-2;
+  }
+
+  strong {
+    @apply font-bold text-primary;
+  }
+
+  p {
+    @apply text-text-primary leading-relaxed mb-4;
+  }
+}
+
+@layer components {
+  /* Chat Styles */
+  .chat-bubble {
+    @apply max-w-[60%] rounded-xl p-2.5 shadow-sm;
+    animation: message-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .chat-bubble-user {
+    @apply bg-[var(--chat-user)] text-text-primary border border-black/10;
+    animation-name: message-pop-right;
+  }
+
+  .chat-bubble-bot {
+    @apply bg-[var(--chat-bot)] border border-black/20;
+    animation-name: message-pop-left;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Button Styles */
+  .btn-material {
+    @apply rounded-full px-4 py-2 font-medium transition-all duration-300;
+    box-shadow: 0 2px 4px var(--shadow-color);
+  }
+
+  .btn-material:hover {
+    box-shadow: 0 4px 8px var(--shadow-color);
+    transform: translateY(-1px);
+  }
+
+  .btn-material:active {
+    box-shadow: 0 1px 2px var(--shadow-color);
+    transform: translateY(0);
+  }
+
+  .btn-material-primary {
+    @apply bg-primary text-white hover:bg-primary-dark;
+  }
+
+  .btn-material-secondary {
+    @apply bg-bg-secondary text-text-secondary hover:bg-opacity-80;
+  }
+
+  /* Navigation Styles */
+  .nav-link {
+    @apply flex items-center gap-2 px-3 py-2 rounded-full transition-colors duration-200;
+  }
+
+  .nav-link:hover {
+    @apply bg-hover-overlay text-primary;
+  }
+
+  .nav-link.active {
+    @apply bg-primary text-white;
+  }
+
+  /* Typing Indicator */
+  .typing-indicator {
+    @apply flex items-center gap-1;
+  }
+
+  .typing-indicator span {
+    @apply w-2 h-2 rounded-full;
+    background-color: rgba(0, 0, 0, 0.6);
+    animation: typing-bounce 1s infinite;
+  }
+
+  .typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  /* Map Styles */
+  .mapboxgl-map {
+    @apply rounded-lg;
+  }
+
+  .mapboxgl-ctrl-group {
+    @apply shadow-lg !important;
+  }
+
+  .mapboxgl-ctrl button {
+    @apply bg-white text-text-primary border-0 !important;
+  }
+
+  .mapboxgl-popup {
+    @apply max-w-xs;
+  }
+
+  .mapboxgl-popup-content {
+    @apply bg-white rounded-lg shadow-lg border border-black/10 p-4 !important;
+  }
+
+  .marker {
+    @apply cursor-pointer;
+  }
+
+  .marker:hover {
+    @apply scale-110;
+  }
+}
+
+@keyframes message-pop-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes message-pop-right {
+  0% {
+    opacity: 0;
+    transform: translateX(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
